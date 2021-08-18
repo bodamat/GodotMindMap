@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://gui/Inspector.tscn" type="PackedScene" id=1]
 [ext_resource path="res://graph/GraphEdit.tscn" type="PackedScene" id=2]
+[ext_resource path="res://theme2.tres" type="Theme" id=3]
 [ext_resource path="res://gui/Console.tscn" type="PackedScene" id=4]
 
 [sub_resource type="StyleBoxFlat" id=1]
@@ -20,15 +21,56 @@ shadow_size = 5
 [node name="Main" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+theme = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="GraphEdit" parent="." instance=ExtResource( 2 )]
-inspector = NodePath("../Inspector")
-savedialogue = NodePath("../SaveDialog")
-loaddialogue = NodePath("../LoadDialog")
-console = NodePath("../Console")
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+margin_right = 1920.0
+margin_bottom = 31.0
+
+[node name="MenuButton" type="MenuButton" parent="VBoxContainer/HBoxContainer"]
+margin_right = 56.0
+margin_bottom = 31.0
+text = "File"
+align = 0
+items = [ "Item 0", null, 0, false, false, 0, 0, null, "", false, "Item 1", null, 0, false, false, 1, 0, null, "", false ]
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MenuButton2" type="MenuButton" parent="VBoxContainer/HBoxContainer"]
+margin_left = 60.0
+margin_right = 116.0
+margin_bottom = 31.0
+focus_mode = 2
+text = "View"
+align = 0
+items = [ "Inspector", null, 1, true, false, 0, 0, null, "", false ]
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GraphEdit" parent="VBoxContainer" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 35.0
+margin_right = 1920.0
+margin_bottom = 1080.0
+size_flags_vertical = 3
+scroll_offset = Vector2( 0, -26 )
+inspector = NodePath("../../Inspector")
+savedialogue = NodePath("../../SaveDialog")
+loaddialogue = NodePath("../../LoadDialog")
+console = NodePath("../../Console")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 anchor_left = 1.0
@@ -104,6 +146,7 @@ margin_left = -280.347
 margin_top = 232.26
 margin_right = -29.3472
 margin_bottom = 491.26
+graph_edit = NodePath("../VBoxContainer/GraphEdit")
 
 [node name="SaveDialog" type="FileDialog" parent="."]
 margin_left = 663.519
@@ -113,8 +156,8 @@ margin_bottom = 838.412
 window_title = "Save as File"
 resizable = true
 access = 2
-current_dir = "/Projects/MindMap"
-current_path = "/Projects/MindMap/"
+current_dir = "/Users/Bohdan/OneDrive/Desktop/GodotMindMap"
+current_path = "/Users/Bohdan/OneDrive/Desktop/GodotMindMap/"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -128,17 +171,18 @@ window_title = "Open a File"
 resizable = true
 mode = 0
 access = 2
-current_dir = "/Projects/MindMap"
-current_path = "/Projects/MindMap/"
+current_dir = "/Users/Bohdan/OneDrive/Desktop/GodotMindMap"
+current_path = "/Users/Bohdan/OneDrive/Desktop/GodotMindMap/"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Console" parent="." instance=ExtResource( 4 )]
-[connection signal="node_unselected" from="GraphEdit" to="GraphEdit" method="_on_GraphEdit_node_unselected"]
-[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/newnode" to="GraphEdit" method="_on_newnode_pressed"]
-[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/save" to="GraphEdit" method="_on_save_pressed"]
-[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/saveas" to="GraphEdit" method="_on_saveas_pressed"]
-[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/load" to="GraphEdit" method="_on_load_pressed"]
-[connection signal="file_selected" from="SaveDialog" to="GraphEdit" method="_on_SaveDialog_file_selected"]
-[connection signal="file_selected" from="LoadDialog" to="GraphEdit" method="_on_LoadDialog_file_selected"]
+
+[connection signal="node_unselected" from="VBoxContainer/GraphEdit" to="VBoxContainer/GraphEdit" method="_on_GraphEdit_node_unselected"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/newnode" to="VBoxContainer/GraphEdit" method="_on_newnode_pressed"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/save" to="VBoxContainer/GraphEdit" method="_on_save_pressed"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/saveas" to="VBoxContainer/GraphEdit" method="_on_saveas_pressed"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/load" to="VBoxContainer/GraphEdit" method="_on_load_pressed"]
+[connection signal="file_selected" from="SaveDialog" to="VBoxContainer/GraphEdit" method="_on_SaveDialog_file_selected"]
+[connection signal="file_selected" from="LoadDialog" to="VBoxContainer/GraphEdit" method="_on_LoadDialog_file_selected"]
