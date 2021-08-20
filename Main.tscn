@@ -2,21 +2,9 @@
 
 [ext_resource path="res://gui/Inspector.tscn" type="PackedScene" id=1]
 [ext_resource path="res://graph/GraphEdit.tscn" type="PackedScene" id=2]
-[ext_resource path="res://theme2.tres" type="Theme" id=3]
+[ext_resource path="res://themes/ThemeFromEditor.tres" type="Theme" id=3]
 [ext_resource path="res://gui/Console.tscn" type="PackedScene" id=4]
-
-[sub_resource type="StyleBoxFlat" id=1]
-bg_color = Color( 0.698039, 0.698039, 0.698039, 1 )
-border_width_left = 4
-border_width_top = 4
-border_width_right = 4
-border_width_bottom = 4
-border_color = Color( 0.215686, 0.215686, 0.215686, 1 )
-corner_radius_top_left = 4
-corner_radius_top_right = 4
-corner_radius_bottom_right = 4
-corner_radius_bottom_left = 4
-shadow_size = 5
+[ext_resource path="res://gui/MenuBar.gd" type="Script" id=5]
 
 [node name="Main" type="Control"]
 anchor_right = 1.0
@@ -26,127 +14,102 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="Panel" type="Panel" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
-margin_right = 1920.0
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 5.0
+margin_top = 8.0
+margin_right = -5.0
+margin_bottom = -8.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TopBar" type="HBoxContainer" parent="Panel/VBoxContainer"]
+margin_right = 1910.0
 margin_bottom = 31.0
 
-[node name="MenuButton" type="MenuButton" parent="VBoxContainer/HBoxContainer"]
+[node name="MenuBar" type="HBoxContainer" parent="Panel/VBoxContainer/TopBar"]
+margin_right = 1667.0
+margin_bottom = 31.0
+size_flags_horizontal = 3
+custom_constants/separation = 10
+script = ExtResource( 5 )
+
+[node name="MenuButtonFile" type="MenuButton" parent="Panel/VBoxContainer/TopBar/MenuBar"]
 margin_right = 56.0
 margin_bottom = 31.0
 text = "File"
+flat = false
 align = 0
-items = [ "Item 0", null, 0, false, false, 0, 0, null, "", false, "Item 1", null, 0, false, false, 1, 0, null, "", false ]
+items = [ "Save file", null, 0, false, false, 0, 0, null, "", false, "Save as file", null, 0, false, false, 1, 0, null, "", false, "Load file", null, 0, false, false, 2, 0, null, "", false, "", null, 0, false, false, 3, 0, null, "", true, "Settings", null, 0, false, false, 4, 0, null, "", false, "", null, 0, false, false, 5, 0, null, "", true, "Quit", null, 0, false, false, 6, 0, null, "", false ]
+switch_on_hover = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="MenuButton2" type="MenuButton" parent="VBoxContainer/HBoxContainer"]
-margin_left = 60.0
-margin_right = 116.0
+[node name="MenuButtonNode" type="MenuButton" parent="Panel/VBoxContainer/TopBar/MenuBar"]
+margin_left = 66.0
+margin_right = 122.0
 margin_bottom = 31.0
 focus_mode = 2
-text = "View"
+text = "Node"
+flat = false
 align = 0
-items = [ "Inspector", null, 1, true, false, 0, 0, null, "", false ]
+items = [ "Add", null, 0, false, false, 0, 0, null, "", false ]
+switch_on_hover = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="GraphEdit" parent="VBoxContainer" instance=ExtResource( 2 )]
+[node name="ToolButtonAbout" type="ToolButton" parent="Panel/VBoxContainer/TopBar/MenuBar"]
+margin_left = 132.0
+margin_right = 199.0
+margin_bottom = 31.0
+text = "About"
+flat = false
+
+[node name="Label" type="Label" parent="Panel/VBoxContainer/TopBar"]
+margin_left = 1671.0
+margin_right = 1910.0
+margin_bottom = 31.0
+text = "Mind map 0.3.0.stable"
+
+[node name="HSplitContainer" type="HSplitContainer" parent="Panel/VBoxContainer"]
+margin_top = 35.0
+margin_right = 1910.0
+margin_bottom = 1064.0
+size_flags_vertical = 3
+split_offset = 1620
+dragger_visibility = 2
+
+[node name="GraphEdit" parent="Panel/VBoxContainer/HSplitContainer" instance=ExtResource( 2 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_top = 35.0
-margin_right = 1920.0
-margin_bottom = 1080.0
+margin_right = 1600.0
+margin_bottom = 1029.0
 size_flags_vertical = 3
-scroll_offset = Vector2( 0, -26 )
-inspector = NodePath("../../Inspector")
-savedialogue = NodePath("../../SaveDialog")
-loaddialogue = NodePath("../../LoadDialog")
-console = NodePath("../../Console")
+scroll_offset = Vector2( -13, -10 )
+minimap_enabled = false
+inspector = NodePath("../Inspector")
+savedialogue = NodePath("../../../../SaveDialog")
+loaddialogue = NodePath("../../../../LoadDialog")
+console = NodePath("../../../../Console")
 
-[node name="PanelContainer" type="PanelContainer" parent="."]
-anchor_left = 1.0
-anchor_right = 1.0
-margin_left = -262.06
-margin_top = 19.2758
-margin_right = -23.0601
-margin_bottom = 212.276
-size_flags_horizontal = 3
-size_flags_vertical = 0
-custom_styles/panel = SubResource( 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
-margin_left = 4.0
-margin_top = 4.0
-margin_right = 235.0
-margin_bottom = 189.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-custom_constants/margin_right = 10
-custom_constants/margin_top = 10
-custom_constants/margin_left = 10
-custom_constants/margin_bottom = 10
-__meta__ = {
-"_edit_lock_": true
-}
-
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer"]
-margin_left = 10.0
-margin_top = 10.0
-margin_right = 221.0
-margin_bottom = 175.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-custom_constants/separation = 8
-
-[node name="newnode" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer"]
-margin_right = 211.0
-margin_bottom = 35.0
-size_flags_vertical = 3
-text = "new node"
-
-[node name="save" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer"]
-margin_top = 43.0
-margin_right = 211.0
-margin_bottom = 78.0
-size_flags_vertical = 3
-text = "save"
-
-[node name="saveas" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer"]
-margin_top = 86.0
-margin_right = 211.0
-margin_bottom = 121.0
-size_flags_vertical = 3
-text = "save as ..."
-
-[node name="load" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer"]
-margin_top = 129.0
-margin_right = 211.0
-margin_bottom = 165.0
-size_flags_vertical = 3
-text = "load"
-
-[node name="Inspector" parent="." instance=ExtResource( 1 )]
-anchor_left = 1.0
-anchor_top = 0.0
-anchor_right = 1.0
+[node name="Inspector" parent="Panel/VBoxContainer/HSplitContainer" instance=ExtResource( 1 )]
+anchor_left = 0.0
+anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = -280.347
-margin_top = 232.26
-margin_right = -29.3472
-margin_bottom = 491.26
-graph_edit = NodePath("../VBoxContainer/GraphEdit")
+margin_left = 1600.0
+margin_right = 1910.0
+margin_bottom = 1029.0
 
 [node name="SaveDialog" type="FileDialog" parent="."]
 margin_left = 663.519
@@ -156,6 +119,7 @@ margin_bottom = 838.412
 window_title = "Save as File"
 resizable = true
 access = 2
+filters = PoolStringArray( "*.save" )
 current_dir = "/Users/Bohdan/OneDrive/Desktop/GodotMindMap"
 current_path = "/Users/Bohdan/OneDrive/Desktop/GodotMindMap/"
 __meta__ = {
@@ -171,6 +135,7 @@ window_title = "Open a File"
 resizable = true
 mode = 0
 access = 2
+filters = PoolStringArray( "*.save" )
 current_dir = "/Users/Bohdan/OneDrive/Desktop/GodotMindMap"
 current_path = "/Users/Bohdan/OneDrive/Desktop/GodotMindMap/"
 __meta__ = {
@@ -179,10 +144,8 @@ __meta__ = {
 
 [node name="Console" parent="." instance=ExtResource( 4 )]
 
-[connection signal="node_unselected" from="VBoxContainer/GraphEdit" to="VBoxContainer/GraphEdit" method="_on_GraphEdit_node_unselected"]
-[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/newnode" to="VBoxContainer/GraphEdit" method="_on_newnode_pressed"]
-[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/save" to="VBoxContainer/GraphEdit" method="_on_save_pressed"]
-[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/saveas" to="VBoxContainer/GraphEdit" method="_on_saveas_pressed"]
-[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/load" to="VBoxContainer/GraphEdit" method="_on_load_pressed"]
-[connection signal="file_selected" from="SaveDialog" to="VBoxContainer/GraphEdit" method="_on_SaveDialog_file_selected"]
-[connection signal="file_selected" from="LoadDialog" to="VBoxContainer/GraphEdit" method="_on_LoadDialog_file_selected"]
+[connection signal="pressed" from="Panel/VBoxContainer/TopBar/MenuBar/ToolButtonAbout" to="Panel/VBoxContainer/TopBar/MenuBar" method="_on_ToolButtonAbout_pressed"]
+[connection signal="node_unselected" from="Panel/VBoxContainer/HSplitContainer/GraphEdit" to="Panel/VBoxContainer/HSplitContainer/GraphEdit" method="_on_GraphEdit_node_unselected"]
+[connection signal="scroll_offset_changed" from="Panel/VBoxContainer/HSplitContainer/GraphEdit" to="Panel/VBoxContainer/HSplitContainer/GraphEdit" method="_on_GraphEdit_scroll_offset_changed"]
+[connection signal="file_selected" from="SaveDialog" to="Panel/VBoxContainer/HSplitContainer/GraphEdit" method="_on_SaveDialog_file_selected"]
+[connection signal="file_selected" from="LoadDialog" to="Panel/VBoxContainer/HSplitContainer/GraphEdit" method="_on_LoadDialog_file_selected"]

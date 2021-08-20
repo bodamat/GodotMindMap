@@ -24,7 +24,7 @@ export(Type) var type = Type.TYPE_ADD setget set_type
 
 onready var letext := $VBoxContainer/letext
 onready var leurl := $VBoxContainer/leurl
-onready var button := $Button
+onready var button := $VBoxContainer/Button
 
 func set_type(value):
 	type = value

@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://theme.tres" type="Theme" id=1]
-[ext_resource path="res://styleboxflat.tres" type="StyleBox" id=2]
+[ext_resource path="res://themes/theme.tres" type="Theme" id=1]
+[ext_resource path="res://themes/styles/styleboxflat.tres" type="StyleBox" id=2]
 [ext_resource path="res://graph/GraphNode.gd" type="Script" id=3]
 
 [sub_resource type="StyleBoxFlat" id=1]
@@ -21,8 +21,8 @@ corner_radius_bottom_right = 2
 corner_radius_bottom_left = 2
 
 [node name="GraphNode" type="GraphNode"]
-margin_right = 318.0
-margin_bottom = 212.0
+margin_right = 322.0
+margin_bottom = 117.0
 rect_scale = Vector2( 1.00564, 1 )
 size_flags_vertical = 3
 theme = ExtResource( 1 )
@@ -48,7 +48,7 @@ __meta__ = {
 [node name="TextEdit" type="TextEdit" parent="."]
 margin_left = 25.0
 margin_top = 27.0
-margin_right = 293.0
+margin_right = 297.0
 margin_bottom = 47.0
 rect_min_size = Vector2( 0, 20 )
 size_flags_vertical = 3

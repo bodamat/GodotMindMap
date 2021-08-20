@@ -5,12 +5,12 @@ export(NodePath) var graph_edit
 onready var url_manager := preload("res://extra/UrlManager.tscn")
 
 onready var container := $MarginContainer
-onready var title := $MarginContainer/VBoxContainer/HBoxContainer/TextEdit
-onready var color_frame := $MarginContainer/VBoxContainer/HBoxContainer2/ColorFrame
-onready var color_selected := $MarginContainer/VBoxContainer/HBoxContainer3/ColorSelected
-onready var link_container := $MarginContainer/VBoxContainer/Links
-onready var add_link_text := $MarginContainer/VBoxContainer/newlinkcontainer/text
-onready var add_link_url := $MarginContainer/VBoxContainer/newlinkcontainer/url
+onready var title := $MarginContainer/ScrollContainer/VBoxContainer/VBoxContainer/HBoxContainer/TextEdit
+onready var color_frame := $MarginContainer/ScrollContainer/VBoxContainer/VBoxContainer/VBoxContainer/HBoxContainer2/ColorFrame
+onready var color_selected := $MarginContainer/ScrollContainer/VBoxContainer/VBoxContainer/VBoxContainer/HBoxContainer3/ColorSelected
+onready var link_container := $MarginContainer/ScrollContainer/VBoxContainer/Links
+onready var add_link_text := $MarginContainer/ScrollContainer/VBoxContainer/newlinkcontainer/text
+onready var add_link_url := $MarginContainer/ScrollContainer/VBoxContainer/newlinkcontainer/url
 var active_node : GraphNode
 onready var original_size := get_size()
 

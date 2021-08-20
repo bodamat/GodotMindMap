@@ -9,17 +9,10 @@ onready var graph_node = preload("res://graph/GraphNode.tscn")
 var zoom_active := false
 
 var copy = []
-export var save_path := "res://savegraph.save"
+export var save_path := "res://mindmap.save"
 
-
-# Called when the node enters the scene tree for the first time.
 func _ready():
 	load_save()
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
 
 func _unhandled_input(event):
 	if event.is_action_pressed("saveas"):
@@ -61,6 +54,12 @@ func save(path := save_path):
 	print("saved!")
 	get_node(console).send("saved at " + path)
 
+func saveas():
+	get_node(savedialogue).popup_centered()
+
+func menu_load():
+	get_node(loaddialogue).popup_centered()
+
 func load_save(path := save_path):
 	var save_graph = File.new()
 	if not save_graph.file_exists(path):
@@ -99,6 +98,8 @@ func disconnect_connections_of_node(node_name):
 	for c in conn["left"]: disconnect_node(c, 0, node_name, 0)
 	for c in conn["right"]: disconnect_node(node_name, 0, c, 0)
 
+func menu_new_node():
+	new_node(scroll_offset + get_viewport_rect().size/2)
 
 func new_node(position:Vector2, title:="Title"):
 	var new_node = graph_node.instance()
@@ -150,7 +151,7 @@ func _on_GraphEdit_duplicate_nodes_request():
 
 
 func _on_newnode_pressed():
-	new_node(scroll_offset + get_viewport_rect().size/2)
+	menu_new_node()
 
 
 func _on_save_pressed():
@@ -158,7 +159,7 @@ func _on_save_pressed():
 
 
 func _on_saveas_pressed():
-	get_node(savedialogue).show()
+	saveas()
 
 
 func _on_SaveDialog_file_selected(path):
@@ -170,7 +171,7 @@ func _on_LoadDialog_file_selected(path):
 
 
 func _on_load_pressed():
-	get_node(loaddialogue).popup_centered()
+	menu_load()
 
 
 func _on_GraphEdit_node_selected(node):
@@ -179,3 +180,9 @@ func _on_GraphEdit_node_selected(node):
 
 func _on_GraphEdit_node_unselected(node):
 	get_node(inspector).hide()
+
+
+func _on_GraphEdit_scroll_offset_changed(ofs):
+	#TODO: get direction from ofs to create more smooth scroll
+	scroll_offset = ofs - Vector2(0, 60)
+	print(ofs)
