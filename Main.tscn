@@ -101,7 +101,13 @@ minimap_enabled = false
 inspector = NodePath("../Inspector")
 savedialogue = NodePath("../../../../SaveDialog")
 loaddialogue = NodePath("../../../../LoadDialog")
-console = NodePath("../../../../Console")
+console = NodePath("Console")
+
+[node name="Console" parent="Panel/VBoxContainer/HSplitContainer/GraphEdit" instance=ExtResource( 4 )]
+margin_left = 5.0
+margin_top = -49.2166
+margin_right = -24.0
+margin_bottom = -18.2166
 
 [node name="Inspector" parent="Panel/VBoxContainer/HSplitContainer" instance=ExtResource( 1 )]
 anchor_left = 0.0
@@ -141,8 +147,6 @@ current_path = "/Users/Bohdan/OneDrive/Desktop/GodotMindMap/"
 __meta__ = {
 "_edit_use_anchors_": false
 }
-
-[node name="Console" parent="." instance=ExtResource( 4 )]
 
 [connection signal="pressed" from="Panel/VBoxContainer/TopBar/MenuBar/ToolButtonAbout" to="Panel/VBoxContainer/TopBar/MenuBar" method="_on_ToolButtonAbout_pressed"]
 [connection signal="node_unselected" from="Panel/VBoxContainer/HSplitContainer/GraphEdit" to="Panel/VBoxContainer/HSplitContainer/GraphEdit" method="_on_GraphEdit_node_unselected"]

@@ -1,6 +1,6 @@
 extends HBoxContainer
 
-onready var graph_edit = $"../HSplitContainer/GraphEdit"
+onready var graph_edit = $"../../HSplitContainer/GraphEdit"
 onready var file_button = $MenuButtonFile
 onready var node_button = $MenuButtonNode
 onready var about_button = $ToolButtonAbout

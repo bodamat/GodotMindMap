@@ -18,12 +18,15 @@ func get_data():
 	if links_instance != null: _offset = links_instance.get_size().y
 	var frame_color = get("custom_styles/frame").get_border_color()
 	var selected_frame_color = get("custom_styles/selectedframe").get_border_color()
-	return {"text": text_edit.text, "title": get_title(), 
-			"frame_color": {"r": frame_color.r, "g": frame_color.g, "b": frame_color.b}, 
-			"selected_frame_color": {"r": selected_frame_color.r, "g": selected_frame_color.g, "b": selected_frame_color.b},
-			"links": get_links(),
-			"size_x":get_rect().size.x,
-			"size_y":get_rect().size.y}
+	return {
+		"text": text_edit.text, 
+		"title": get_title(), 
+		"frame_color": { "r": frame_color.r, "g": frame_color.g, "b": frame_color.b }, 
+		"selected_frame_color": { "r": selected_frame_color.r, "g": selected_frame_color.g, "b": selected_frame_color.b },
+		"links": get_links(),
+		"size_x":get_rect().size.x,
+		"size_y":get_rect().size.y
+	}
 
 func set_data(data):
 	text_edit.text = data["text"]
