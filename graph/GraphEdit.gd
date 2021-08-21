@@ -6,6 +6,10 @@ export(NodePath) var loaddialogue
 export(NodePath) var console
 onready var graph_node = preload("res://graph/GraphNode.tscn")
 
+onready var scroll_ofs := scroll_offset
+var scroll_offset_detect := 10.0
+var soft_scroll_offset := 15.0
+
 var zoom_active := false
 
 var copy = []
@@ -181,8 +185,11 @@ func _on_GraphEdit_node_selected(node):
 func _on_GraphEdit_node_unselected(node):
 	get_node(inspector).hide()
 
+func _on_GraphEdit_scroll_offset_changed(ofs: Vector2) -> void:
+	var dir = scroll_ofs.direction_to(ofs)
+	var dist = scroll_ofs.distance_to(ofs)
 
-func _on_GraphEdit_scroll_offset_changed(ofs):
-	#TODO: get direction from ofs to create more smooth scroll
-	scroll_offset = ofs - Vector2(0, 60)
-	print(ofs)
+	if dist > scroll_offset_detect:
+		scroll_offset = ofs - dir * dist + dir * soft_scroll_offset
+	
+	scroll_ofs = scroll_offset
