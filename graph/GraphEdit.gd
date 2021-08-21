@@ -180,9 +180,3 @@ func _on_GraphEdit_node_selected(node):
 
 func _on_GraphEdit_node_unselected(node):
 	get_node(inspector).hide()
-
-
-func _on_GraphEdit_scroll_offset_changed(ofs):
-	#TODO: get direction from ofs to create more smooth scroll
-	scroll_offset = ofs - Vector2(0, 60)
-	print(ofs)

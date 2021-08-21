@@ -146,6 +146,5 @@ __meta__ = {
 
 [connection signal="pressed" from="Panel/VBoxContainer/TopBar/MenuBar/ToolButtonAbout" to="Panel/VBoxContainer/TopBar/MenuBar" method="_on_ToolButtonAbout_pressed"]
 [connection signal="node_unselected" from="Panel/VBoxContainer/HSplitContainer/GraphEdit" to="Panel/VBoxContainer/HSplitContainer/GraphEdit" method="_on_GraphEdit_node_unselected"]
-[connection signal="scroll_offset_changed" from="Panel/VBoxContainer/HSplitContainer/GraphEdit" to="Panel/VBoxContainer/HSplitContainer/GraphEdit" method="_on_GraphEdit_scroll_offset_changed"]
 [connection signal="file_selected" from="SaveDialog" to="Panel/VBoxContainer/HSplitContainer/GraphEdit" method="_on_SaveDialog_file_selected"]
 [connection signal="file_selected" from="LoadDialog" to="Panel/VBoxContainer/HSplitContainer/GraphEdit" method="_on_LoadDialog_file_selected"]
