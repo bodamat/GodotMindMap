@@ -2,32 +2,15 @@
 
 [ext_resource path="res://extra/Links.gd" type="Script" id=1]
 
-[node name="links" type="VBoxContainer"]
+[node name="links" type="GridContainer"]
+margin_top = 4.0
 margin_right = 268.0
-margin_bottom = 29.0
+margin_bottom = 42.0
+custom_constants/vseparation = 7
+custom_constants/hseparation = 7
+columns = 2
 script = ExtResource( 1 )
 __meta__ = {
-"_edit_use_anchors_": false
+"_edit_use_anchors_": false,
+"_editor_description_": ""
 }
-
-[node name="separator1" type="Control" parent="."]
-visible = false
-margin_right = 268.0
-margin_bottom = 4.0
-rect_min_size = Vector2( 0, 4 )
-
-[node name="container" type="HBoxContainer" parent="."]
-margin_right = 268.0
-margin_bottom = 29.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="separator2" type="Control" parent="."]
-visible = false
-margin_top = 25.0
-margin_right = 268.0
-margin_bottom = 29.0
-rect_min_size = Vector2( 0, 4 )

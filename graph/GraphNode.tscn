@@ -42,17 +42,22 @@ script = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+container = NodePath("VBoxContainer")
 
-[node name="TextEdit" type="TextEdit" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
 margin_left = 25.0
 margin_top = 27.0
 margin_right = 297.0
 margin_bottom = 47.0
+custom_constants/separation = 7
+
+[node name="TextEdit" type="TextEdit" parent="VBoxContainer"]
+margin_right = 272.0
+margin_bottom = 20.0
 rect_min_size = Vector2( 0, 20 )
 size_flags_vertical = 3
 wrap_enabled = true
 
 [connection signal="close_request" from="." to="." method="_on_close_request"]
-[connection signal="focus_entered" from="." to="." method="_on_GraphNode_focus_entered"]
 [connection signal="resize_request" from="." to="." method="_on_resize_request"]
-[connection signal="focus_entered" from="TextEdit" to="." method="_on_TextEdit_focus_entered"]
+[connection signal="focus_entered" from="VBoxContainer/TextEdit" to="." method="_on_TextEdit_focus_entered"]

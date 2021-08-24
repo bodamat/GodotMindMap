@@ -4,7 +4,9 @@ export(float) var double_click_time := 0.25 * 1000
 
 onready var link_button = preload("res://extra/Link.tscn")
 onready var links = preload("res://extra/Links.tscn")
-onready var text_edit = $TextEdit
+onready var text_edit = $VBoxContainer/TextEdit
+export(NodePath) var container
+
 var links_instance
 
 var text_edit_resize := 35
@@ -79,7 +81,7 @@ func _on_resize_request(new_size):
 		rect_size = new_size
 	var _offset = 0
 	if links_instance != null: _offset = links_instance.get_size().y
-	text_edit.set_custom_minimum_size(Vector2(-1, rect_size.y-text_edit_resize-_offset))
+	text_edit.set_custom_minimum_size(Vector2(-1, get_rect().size.y - text_edit_resize - _offset))
 
 
 func _on_TextEdit_focus_entered():
@@ -89,7 +91,7 @@ func _on_TextEdit_focus_entered():
 func add_link(text, uri):
 	if links_instance == null:
 		links_instance = links.instance()
-		add_child(links_instance)
+		get_node(container).add_child(links_instance)
 	links_instance.add_link(text, uri)
 
 
@@ -109,9 +111,6 @@ func remove_link(idx:int):
 func update_link(idx:int, text:String, url:String):
 	links_instance.update_link(idx, text, url)
 
-
-func _on_GraphNode_focus_entered() -> void:
-	print("Select")
 
 func _detect_double_click() -> bool:
 	var new_click := OS.get_ticks_msec()
