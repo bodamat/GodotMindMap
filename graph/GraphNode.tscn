@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://themes/ThemeFromEditor.tres" type="Theme" id=1]
 [ext_resource path="res://themes/styles/styleboxflat.tres" type="StyleBox" id=2]
@@ -14,13 +14,6 @@ border_width_top = 24
 border_color = Color( 0.890196, 0.890196, 0.890196, 1 )
 corner_radius_top_left = 2
 corner_radius_top_right = 2
-corner_radius_bottom_right = 5
-corner_radius_bottom_left = 5
-
-[sub_resource type="StyleBoxFlat" id=2]
-bg_color = Color( 0.14902, 0.172549, 0.231373, 1 )
-corner_radius_top_left = 5
-corner_radius_top_right = 5
 corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 
@@ -57,9 +50,9 @@ margin_right = 297.0
 margin_bottom = 47.0
 rect_min_size = Vector2( 0, 20 )
 size_flags_vertical = 3
-custom_styles/normal = SubResource( 2 )
 wrap_enabled = true
 
 [connection signal="close_request" from="." to="." method="_on_close_request"]
+[connection signal="focus_entered" from="." to="." method="_on_GraphNode_focus_entered"]
 [connection signal="resize_request" from="." to="." method="_on_resize_request"]
 [connection signal="focus_entered" from="TextEdit" to="." method="_on_TextEdit_focus_entered"]

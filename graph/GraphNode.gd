@@ -1,5 +1,6 @@
 extends GraphNode
 
+export(float) var double_click_time := 0.25 * 1000
 
 onready var link_button = preload("res://extra/Link.tscn")
 onready var links = preload("res://extra/Links.tscn")
@@ -8,6 +9,7 @@ var links_instance
 
 var text_edit_resize := 35
 
+var _last_pressed_time := 0.0
 
 func _ready():
 	text_edit.set_custom_minimum_size(Vector2(-1, get_rect().size.y-text_edit_resize))
@@ -106,3 +108,15 @@ func remove_link(idx:int):
 	
 func update_link(idx:int, text:String, url:String):
 	links_instance.update_link(idx, text, url)
+
+
+func _on_GraphNode_focus_entered() -> void:
+	print("Select")
+
+func _detect_double_click() -> bool:
+	var new_click := OS.get_ticks_msec()
+	if new_click - _last_pressed_time <= double_click_time:
+		return true
+	
+	_last_pressed_time = new_click
+	return false

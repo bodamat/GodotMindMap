@@ -4,12 +4,13 @@ export(NodePath) var inspector
 export(NodePath) var savedialogue
 export(NodePath) var loaddialogue
 export(NodePath) var console
+export var save_path := "res://mindmap.save"
+
 onready var graph_node = preload("res://graph/GraphNode.tscn")
 
 var zoom_active := false
 
 var copy = []
-export var save_path := "res://mindmap.save"
 
 func _ready():
 	load_save()
@@ -34,9 +35,14 @@ func _input(event):
 		accept_event()
 		
 	if event.is_action_pressed("option_menu"):
-		new_node(get_viewport().get_mouse_position())
+		new_node(_get_mouse_position())
 		accept_event()
-	
+
+func _get_mouse_position() -> Vector2:
+	return (get_local_mouse_position() + scroll_offset) / zoom
+
+func _get_center() -> Vector2:
+	return (get_rect().size / 2 + scroll_offset) / zoom
 
 func save(path := save_path):
 	var save_graph = File.new()
@@ -99,10 +105,10 @@ func disconnect_connections_of_node(node_name):
 	for c in conn["right"]: disconnect_node(node_name, 0, c, 0)
 
 func menu_new_node():
-	new_node(scroll_offset + get_viewport_rect().size/2)
+	new_node(_get_center())
 
 func new_node(position:Vector2, title:="Title"):
-	var new_node = graph_node.instance()
+	var new_node: GraphNode = graph_node.instance()
 	new_node.set_offset(position)
 	new_node.name = new_node.title
 	add_child(new_node)
@@ -135,7 +141,7 @@ func _on_GraphEdit_paste_nodes_request():
 	for c in copy:
 		var new_c = c.duplicate()
 		new_c.set_selected(false)
-		new_c.set_offset(get_viewport().get_mouse_position()-Vector2(new_c.rect_size.x, 0)/2)
+		new_c.set_offset(_get_mouse_position())
 		add_child(new_c)
 		new_c.name = String(randi())
 
@@ -145,7 +151,7 @@ func _on_GraphEdit_duplicate_nodes_request():
 		if c is GraphNode and c.is_selected():
 			var new_c = c.duplicate()
 			new_c.set_selected(false)
-			new_c.set_offset(get_viewport().get_mouse_position()-Vector2(new_c.rect_size.x, 0)/2)
+			new_c.set_offset(_get_mouse_position())
 			new_c.name = new_c.title
 			add_child(new_c)
 
@@ -174,9 +180,15 @@ func _on_load_pressed():
 	menu_load()
 
 
-func _on_GraphEdit_node_selected(node):
-	get_node(inspector).activate(node)
+func _on_GraphEdit_node_selected(node: GraphNode):
+	if node._detect_double_click():
+		print("Double")
+		get_node(inspector).activate(node)
+		return
+	
+	print("Single")
 
 
 func _on_GraphEdit_node_unselected(node):
 	get_node(inspector).hide()
+#	node.set_selected(false)
