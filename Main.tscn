@@ -118,35 +118,55 @@ margin_right = 1910.0
 margin_bottom = 1029.0
 
 [node name="SaveDialog" type="FileDialog" parent="."]
-margin_left = 663.519
-margin_top = 250.412
-margin_right = 1302.52
-margin_bottom = 838.412
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -319.501
+margin_top = -294.0
+margin_right = 319.501
+margin_bottom = 294.0
 window_title = "Save as File"
 resizable = true
 access = 2
 filters = PoolStringArray( "*.save" )
-current_dir = "/Users/Bohdan/OneDrive/Desktop/GodotMindMap"
-current_path = "/Users/Bohdan/OneDrive/Desktop/GodotMindMap/"
+current_dir = "/Users/Bohdan/Desktop/GodotMindMap"
+current_path = "/Users/Bohdan/Desktop/GodotMindMap/"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="LoadDialog" type="FileDialog" parent="."]
-margin_left = 663.519
-margin_top = 250.412
-margin_right = 1302.52
-margin_bottom = 838.412
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -319.501
+margin_top = -294.0
+margin_right = 319.501
+margin_bottom = 294.0
 window_title = "Open a File"
 resizable = true
 mode = 0
 access = 2
 filters = PoolStringArray( "*.save" )
-current_dir = "/Users/Bohdan/OneDrive/Desktop/GodotMindMap"
-current_path = "/Users/Bohdan/OneDrive/Desktop/GodotMindMap/"
+current_dir = "/Users/Bohdan/Desktop/GodotMindMap"
+current_path = "/Users/Bohdan/Desktop/GodotMindMap/"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="WindowDialog" type="WindowDialog" parent="."]
+visible = true
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -267.0
+margin_top = -106.5
+margin_right = 267.0
+margin_bottom = 106.5
+window_title = "About"
 
 [connection signal="pressed" from="Panel/VBoxContainer/TopBar/MenuBar/ToolButtonAbout" to="Panel/VBoxContainer/TopBar/MenuBar" method="_on_ToolButtonAbout_pressed"]
 [connection signal="node_unselected" from="Panel/VBoxContainer/HSplitContainer/GraphEdit" to="Panel/VBoxContainer/HSplitContainer/GraphEdit" method="_on_GraphEdit_node_unselected"]
